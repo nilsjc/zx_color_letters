@@ -8,9 +8,9 @@ ld a, 2 ;; vi vill skriva ut i channel 2, övre delen av specturms skärm(undre 
 call 5633 ;; kan också skrivas som #1601 CHANOPEN
 textloop push bc ;; lägg bc på stacken
 ld b, 8;; ladda b med 8 för att skrivut1 ska loopas 8a gånger
-skrivut1 ld a, (ix) ;; 127 = copyright-tecken
+skrivut1 ld a, (ix) ;; skrivt ut det ix pekar på
 rst 16 ;; utför kommandot
-inc ix
+inc ix ;; räkna upp ix ett steg
 djnz skrivut1 ;; B = B - 1. Om B==0 passera, annars gå till skrivut1
 ld a, 13 ;;skriv ut enter för radbryt (newline)
 rst 16 ;; utför kommandot
@@ -23,11 +23,11 @@ ld a, 4                 ;; ladda a med 4. Används i loop
 ld ix, myattributearray          ;; låt ix peka på myattributearray
 loop ld b, 4            ;; loopstart och ladda b med 4
 row1 ld c, (ix) ;; starta loop "row1" och ladda C med innehållet som pekas på av ix
-ld (hl), c         ;; rita ut innehållet i C
+ld (hl), c         ;; rita ut innehållet i C på den position som pekas ut av hl
 inc ix ;; räkna upp ix
 ld c, (ix) ;; ladda C med innehållet som pekas på av ix
-inc hl
-ld (hl),c ;; rita ut GRÖN (100) ruta
+inc hl ;; räkna upp hl ett steg
+ld (hl),c ;; rita ut attribut med det värdet hl pekar på 
 inc hl
 inc ix
 djnz row1           ;; räkna ner b, hoppa till row1 om b INTE är 0
