@@ -9,7 +9,7 @@ call 5633 ;; kan också skrivas som #1601 CHANOPEN
 textloop push bc ;; lägg bc på stacken
 ld b, 8;; ladda b med 8 för att skrivut1 ska loopas 8a gånger
 skrivut1 ld a, (ix) ;; skrivt ut det ix pekar på
-rst 16 ;; utför kommandot
+rst 16 ;; skriv ut innehållet i accumulatorn(register A)
 inc ix ;; räkna upp ix ett steg
 djnz skrivut1 ;; B = B - 1. Om B==0 passera, annars gå till skrivut1
 ld a, 13 ;;skriv ut enter för radbryt (newline)
